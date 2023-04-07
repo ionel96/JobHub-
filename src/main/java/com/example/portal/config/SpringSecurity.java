@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -28,9 +27,9 @@ public class SpringSecurity {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/home").permitAll()
-                                .requestMatchers("/register").permitAll()
-                                .requestMatchers("/logged").hasRole("USER")
+                        authorize.requestMatchers("/home/**").permitAll()
+                                .requestMatchers("/register/**").permitAll()
+                                .requestMatchers("/logged").authenticated()
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
@@ -39,10 +38,11 @@ public class SpringSecurity {
                                 .permitAll()
                 ).logout(
                         logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                                .logoutUrl("/logout")
+                                .logoutSuccessUrl("/home?logout")
+                                .invalidateHttpSession(true)
                                 .permitAll()
                 );
-        System.out.println("ok filterChain");
         return http.build();
     }
 
@@ -51,6 +51,5 @@ public class SpringSecurity {
         auth
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
-        System.out.println("ok configureGlobal");
     }
 }

@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import javax.management.relation.Role;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -17,7 +14,7 @@ import java.util.List;
 @Table(name="users")
 public class User {
 
-    //private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,17 +23,12 @@ public class User {
     @Column(nullable=false)
     private String name;
 
+    @Column(nullable=false)
+    private String role;
+
     @Column(nullable=false, unique=true)
     private String email;
 
     @Column(nullable=false)
     private String password;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinTable(
-            name="users_roles",
-            joinColumns={@JoinColumn(name="user_id", referencedColumnName="user_id")},
-            inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")})
-
-    private List<Role> roles = new ArrayList<>();
 }

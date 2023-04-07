@@ -7,16 +7,12 @@
     </head>
     <body>
     <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
             <ul class="nav justify-content-end flex-grow-1 pe-3">
                 <li class="nav-item">
-                    <a class="navbar-brand" href="/home">Logout</a>
+                    <a class="navbar-brand" th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
                 </li>
             </ul>
         </div>
     </nav>
-    <div th:if="${param.logout}">
-        <div class="alert alert-success"> You have been logged out.</div>
-    </div>
     </body>
 </html>
