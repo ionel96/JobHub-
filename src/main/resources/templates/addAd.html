@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+        <title>Title</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    </head>
+    <body>
+    <div th:if="${param.success}" class="container-fluid">
+        <div class="alert alert-success alert-dismissible fade show" role="alert" align="center">
+            <strong> The ad has been successfully added! </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+        <div class="container mt-3 mx-auto" style="width: 500px">
+            <div class="mb-3">
+                <div class="card-header" align="center"><h3> Add a new ad </h3></div>
+                <div class="container my-3">
+                    <form th:action="@{/announcement/add}" th:object="${ad}" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Company Name *</label>
+                            <input type="text" th:field="*{companyName}" class="form-control" placeholder="Enter the company name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Type of job *</label>
+                            <input type="text" th:field="*{typeJob}" class="form-control" placeholder="Enter type of job" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone *</label>
+                            <input type="tel" th:field="*{phone}" class="form-control" placeholder="0712345678" value="" required pattern="[0-9]{10}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">City *</label>
+                            <input type="text" th:field="*{city}" class="form-control" placeholder="Bucuresti" required>
+                        </div>
+                        <p> Choose an option * </p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="btn1" name="check1" required>
+                            <label class="form-check-label" for="btn1">Add a link to your website</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="btn2"  name="check2" required>
+                            <label class="form-check-label" for="btn2">Add a description</label>
+                        </div>
+                        <div class="mb-3" id="url" style="display:none">
+                            <input type="url" id="link" class="form-control" th:field="*{descriptionOrLink}" placeholder="https: //example.com" required/>
+                        </div>
+                        <div class="mb-3" id="textarea" style="display:none">
+                            <textarea class="form-control" id="text" th:field="*{descriptionOrLink}" placeholder="Job Description" required></textarea>
+                        </div>
+                        <hr>
+                        <input type="submit" value="Save ad" class="btn btn-primary d-grid col-10 mx-auto">
+                    </form>
+                    <script>
+                        const btn1 = document.getElementById('btn1');
+                        const url = document.getElementById('url');
+                        const textarea = document.getElementById('textarea');
+                        const btn2 = document.getElementById('btn2');
+                        const link = document.getElementById('link');
+                        const text = document.getElementById('text');
+                        btn1.addEventListener('click', () => {
+                              if (url.style.display === 'none') {
+                                url.style.display = 'block';
+                                textarea.style.display = 'none';
+                                btn2.disabled = true;
+                                btn2.required = false;
+                                text.disabled = true;
+                              } else {
+                                url.style.display = 'none';
+                                btn2.disabled = false;
+                                btn2.required = true;
+                                link.value = '';
+                                text.disabled = false;
+                              }
+                        });
+                        btn2.addEventListener('click', () => {
+                              if (textarea.style.display === 'none') {
+                                url.style.display = 'none';
+                                textarea.style.display = 'block';
+                                btn1.disabled = true;
+                                btn1.required = false;
+                                link.disabled = true;
+                              } else {
+                                btn1.disabled = false;
+                                btn1.required = true;
+                                textarea.style.display = 'none';
+                                link.disabled = false;
+                                text.value = '';
+                              }
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

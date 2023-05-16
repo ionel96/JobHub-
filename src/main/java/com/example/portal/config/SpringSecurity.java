@@ -29,12 +29,12 @@ public class SpringSecurity {
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/home/**").permitAll()
                                 .requestMatchers("/register/**").permitAll()
-                                .requestMatchers("/logged").authenticated()
+                                .requestMatchers("/announcement/**").authenticated()
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/logged")
+                                .defaultSuccessUrl("/announcement")
                                 .permitAll()
                 ).logout(
                         logout -> logout
