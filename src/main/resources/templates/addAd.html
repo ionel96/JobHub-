@@ -36,11 +36,11 @@
                         </div>
                         <p> Choose an option * </p>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="btn1" name="check1" required>
+                            <input class="form-check-input" type="checkbox" id="btn1" value="link" th:field="*{adType}" name="check1" required>
                             <label class="form-check-label" for="btn1">Add a link to your website</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="btn2"  name="check2" required>
+                            <input class="form-check-input" type="checkbox" id="btn2" value="description" th:field="*{adType}" name="check2" required>
                             <label class="form-check-label" for="btn2">Add a description</label>
                         </div>
                         <div class="mb-3" id="url" style="display:none">

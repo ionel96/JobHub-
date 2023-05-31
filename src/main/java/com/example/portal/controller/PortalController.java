@@ -80,12 +80,13 @@ public class PortalController {
         ad.setDescriptionOrLink(ad.getDescriptionOrLink());
         ad.setTypeJob(ad.getTypeJob());
         ad.setDate(ad.getDate());
+        ad.setAdType(ad.getAdType());
         adRepository.save(ad);
         return "redirect:/announcement/add?success";
     }
 
     @GetMapping("/announcement/list")
-    public String seeListAds(Model model) {
+    public String seeListAds(Model model, Ad ad) {
         model.addAttribute("ad", adRepository.findAll());
         return "list";
     }

@@ -38,4 +38,7 @@ public class Ad {
 
     @Column(nullable=false)
     private String descriptionOrLink;
+
+    @Column(nullable=false)
+    private String adType;
 }
