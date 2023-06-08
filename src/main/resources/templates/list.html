@@ -9,9 +9,9 @@
     <body>
         <br><br>
         <div class="my-2" align="center">
-            <table style="width:80%; height: 200px;" class="table table-bordered rounded rounded-4 overflow-hidden" th:each="ad:${ad}"><br>
+            <table style="width:80%; height: 200px;" class="table table-bordered rounded rounded-4 overflow-hidden" th:each="ad: ${ads}"><br>
                 <tbody>
-                <tr style="height: 0px;">
+                    <tr style="height: 0px;">
                     <tr style="height: 0px;">
                         <td style="width:30%;" class="p-3 mb-2 bg-body-secondary align-middle text-center fs-5" rowspan="4"><p class="text-uppercase" th:text="${ad.companyName}"/></td>
                     </tr>
@@ -43,7 +43,6 @@
                             </div>
                         </td>
                     </tr>
-                </tr>
                 </tbody>
             </table>
         </div>

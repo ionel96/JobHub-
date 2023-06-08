@@ -87,7 +87,7 @@ public class PortalController {
 
     @GetMapping("/announcement/list")
     public String seeListAds(Model model, Ad ad) {
-        model.addAttribute("ad", adRepository.findAll());
+        model.addAttribute("ads", adRepository.findAll());
         return "list";
     }
 }
