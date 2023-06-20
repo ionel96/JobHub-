@@ -9,7 +9,7 @@
     <body>
         <br><br>
         <div class="my-2" align="center">
-            <table style="width:80%; height: 200px;" class="table table-bordered rounded rounded-4 overflow-hidden" th:each="ad: ${ads}"><br>
+            <table style="width:80%; height: 200px;" class="table table-bordered rounded rounded-4 overflow-hidden" th:each="ad: ${ads}" th:with="NameId=${ad.id}"><br>
                 <tbody>
                     <tr style="height: 0px;">
                     <tr style="height: 0px;">
@@ -24,18 +24,17 @@
                             <div class="position-absolute bottom-0" th:text="${ad.date}"></div>
                             <div class="position-absolute top-50 end-0 translate-middle-x">
                                 <a th:if="${ad.adType} == 'link'" th:href="${ad.descriptionOrLink}" type="submit" class="btn btn-outline-primary">Details</a>
-                                <button th:if="${ad.adType} == 'description'" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <button th:if="${ad.adType} == 'description'" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="" th:attr="data-bs-target=${'#id' + NameId}">
                                     Details</button>
                             </div>
-                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal fade" id="id" th:attr="id=${'id' + NameId}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="idLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="staticBackdropLabel"> Job description </h1>
+                                            <h1 class="modal-title fs-5" id="idLabel"> Job description </h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <h3 th:text="${ad.id}"></h3><br>
                                             <p th:text="${ad.descriptionOrLink}"></p>
                                         </div>
                                     </div>
