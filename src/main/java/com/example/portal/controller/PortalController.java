@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import java.security.Principal;
 
 @Controller
@@ -86,7 +85,7 @@ public class PortalController {
     }
 
     @GetMapping("/announcement/list")
-    public String seeListAds(Model model, Ad ad) {
+    public String seeListAds(Model model) {
         model.addAttribute("ads", adRepository.findAll());
         return "list";
     }
